@@ -10,9 +10,19 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "submit .new-task": function (event) {
-      
+      event.preventDefault();
+
+      var text = event.target.text.value;
+
+      Tasks.insert({
+        text: text,
+        createdAt: new Date()
+      });
+
+      //Limpiar el campo de texto
+      event.target.text.value = "";
     }
-  })
+  });
 }
 
 if (Meteor.isServer) {
